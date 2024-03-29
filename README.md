@@ -114,9 +114,9 @@ I'll go into some more detail about some issues and how they could be solved:
     and that paths through water carry the risk of suffocation.
     I really do not want to bother with this topic, so I'll leave this for now.
   - **Climbables and narrow shafts:** We currently do not account for ladders.
-  More generally, as soon as the block shape at a position is not empty we consider that position full.
-  However, there are many blocks that are shaped in a way that a player can pass next to them,
-  e.g. a player can fall down next to a ladder.
+    More generally, as soon as the block shape at a position is not empty we consider that position full.
+    However, there are many blocks that are shaped in a way that a player can pass next to them,
+    e.g. a player can fall down next to a ladder.
   - **Elytra:** Let's leave this one to baritone.
     <br></br>
   - **MovementPathfinder:** Apart from the features above that it definitely does not support yet,
@@ -129,3 +129,11 @@ I'll go into some more detail about some issues and how they could be solved:
     bunny hop node and then tried to run dijkstra or A* on the resulting graph.
     But the search space got far too big far too quickly.
     If we detect a missed jump we could try to optimize this with light backtracking to the point where we jumped?
+- **TeamWork, multiple enemies and group fights:**
+  Currently Phobots do not work together and also do not work with real players.
+  Best you can do is to make them add each other as friends, but that's about it.
+  Phobot instances should be connected over a network and automate the friending part,
+  as well as sharing targets and supporting each other with loot etc..
+  Also, singular Phobot instances are terrible at navigating FFA when many players are there.
+  Phobot might start to chase a player and in the process jump over other players,
+  catching all of their crystals in the process.
