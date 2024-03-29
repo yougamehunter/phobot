@@ -10,7 +10,7 @@ RUN wget -O run/client/mods/hmc-specifics-1.20.4.jar \
 RUN wget -O run/client/mods/hmc-optimizations-0.1.0-fabric.jar \
     https://github.com/3arthqu4ke/hmc-optimizations/releases/download/latest/hmc-optimizations-0.1.0-fabric.jar
 
-RUN mkdir -p run/client/pingbypass/client
+RUN mkdir -p run/client/pingbypass/server
 RUN cp -r -f config/binds/ run/client/pingbypass/server/
 RUN cp -r -f config/settings/ run/client/pingbypass/server/
 
