@@ -1,7 +1,7 @@
 {
   "AccountSpoof": {
     "Enabled": true,
-    "Random": false
+    "Random": true
   },
   "AntiCheat": {
     "Enabled": true,
@@ -45,10 +45,10 @@
     "Mode": "Switch"
   },
   "AutoConnect": {
-    "Enabled": false,
+    "Enabled": true,
     "Reconnect": "Auto",
     "Delay": 5,
-    "Connect": false,
+    "Connect": true,
     "IP": "crystalpvp.cc",
     "Port": 25565
   },
