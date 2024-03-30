@@ -39,7 +39,7 @@ public class AStar<N extends PathfindingNode<N>> extends Dijkstra<N> {
         if (tentative_gScore < getGScore(neighbour)) {
             cameFrom.put(neighbour, current);
             setGScore(neighbour, tentative_gScore);
-            if (hasFScore(neighbour)) {
+            if (isInOpenSet(neighbour)) {
                 openSet.update(neighbour, () -> setFScore(neighbour, tentative_gScore + heuristic(goal, neighbour)));
             } else {
                 setFScore(neighbour, tentative_gScore + heuristic(goal, neighbour));
@@ -52,7 +52,7 @@ public class AStar<N extends PathfindingNode<N>> extends Dijkstra<N> {
         return goal.distance(node);
     }
 
-    protected boolean hasFScore(N node) {
+    protected boolean isInOpenSet(N node) {
         return fScore.containsKey(node);
     }
 

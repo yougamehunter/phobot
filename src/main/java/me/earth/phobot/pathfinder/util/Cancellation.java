@@ -17,6 +17,7 @@ public class Cancellation {
         }
     };
 
+    // TODO: examine volatility?
     protected boolean cancelled;
 
     public void init() {

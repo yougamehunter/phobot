@@ -49,8 +49,8 @@ public class PooledAStar<N extends PoolNode<N>> extends AStar<N> {
     }
 
     @Override
-    protected boolean hasFScore(N node) {
-        return node.getScore(index) != Double.POSITIVE_INFINITY;
+    protected boolean isInOpenSet(N node) {
+        return node.getHeapIndex(index) != -1;
     }
 
     @Override
