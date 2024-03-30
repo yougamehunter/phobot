@@ -30,7 +30,7 @@ Here are some of the most pressing issues:
   something that should be looked into.
 - The [logic controlling the bot](src/main/java/me/earth/phobot/bot/behaviours) is still relatively primitive.
   Especially around chasing and running away from targets.
-  The bot could definitely benefit from playing more safely, as it mostly pops totems due to approaching players to
+  The bot could definitely benefit from playing more safely, as it mostly pops totems due to approaching players too
   closely or making unnecessary hole changes.
   On the other hand I do not want to make it too passive as that is boring.
 - Also, even though crystalpvp has become very automated in general, players still make use of many small strategies,
