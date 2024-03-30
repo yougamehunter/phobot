@@ -1,4 +1,9 @@
 # Phobot
+[![CodeFactor](https://www.codefactor.io/repository/github/3arthqu4ke/phobot/badge/1.20.4)](https://www.codefactor.io/repository/github/3arthqu4ke/phobot/overview/main)
+[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/3arthqu4ke/phobot?logo=docker)](https://hub.docker.com/r/3arthqu4ke/phobot)
+[![Lines of code](docs/loc.svg)](https://tokei.rs/b1/github/3arthqu4ke/phobot?category=code)
+![Minecraft ](https://img.shields.io/badge/MC-1.20.4-31be51.svg)
+[![Build](https://github.com/3arthqu4ke/phobot/actions/workflows/build.yml/badge.svg)](https://github.com/3arthqu4ke/phobot/actions)  
 A plugin for [PingBypass](https://github.com/3arthqu4ke/PingBypass).
 It contains a 1.20.4 utility mod with a CrystalPvP bot using its modules.
 The bot has been built as a proof of concept and specifically for the crystalpvp.cc FFA meta.
