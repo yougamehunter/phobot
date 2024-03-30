@@ -15,7 +15,7 @@ RUN cp -r -f config/binds/ run/client/pingbypass/server/
 RUN cp -r -f config/settings/ run/client/pingbypass/server/
 RUN cp -f config/options.txt run/client/
 
-RUN chmod +x gradlew \
+RUN chmod +x gradlew
 RUN ./gradlew -Phmc.lwjgl=true -Ppb.server=true test
 RUN ./gradlew -Phmc.lwjgl=true -Ppb.server=true fabricJar
 RUN ./gradlew -Phmc.lwjgl=true -Ppb.server=true fabricPreRunClient
