@@ -243,7 +243,7 @@
     "Rotate": true,
     "Duel": false,
     "Aura": true,
-    "Suicide": false
+    "Suicide": true
   },
   "Potions": {
     "Enabled": true,
