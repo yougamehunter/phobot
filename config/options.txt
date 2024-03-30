@@ -1,0 +1,12 @@
+version:3700
+autoJump:false
+enableVsync:false
+touchscreen:false
+fullscreen:false
+renderDistance:12
+simulationDistance:12
+maxFps:260
+graphicsMode:1
+skipMultiplayerWarning:true
+joinedFirstServer:true
+onboardAccessibility:false
