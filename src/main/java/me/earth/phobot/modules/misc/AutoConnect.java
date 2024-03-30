@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
 @Getter
 public class AutoConnect extends PhobotModule {
     private final Setting<Mode> reconnect = constant("Reconnect", Mode.Auto, "Automatically reconnects you when you lose your connection.");
-    private final Setting<Integer> delay = number("Delay", 5, 0, 20, "Delay in seconds until we reconnect.");
+    private final Setting<Integer> delay = number("Delay", 5, 0, 120, "Delay in seconds until we reconnect.");
 
     public AutoConnect(Phobot phobot) {
         super(phobot, "AutoConnect", Categories.MISC, "Automatically connects you to servers.");
