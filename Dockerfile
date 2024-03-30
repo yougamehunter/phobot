@@ -13,9 +13,10 @@ RUN wget -O run/client/mods/hmc-optimizations-0.1.0-fabric.jar \
 RUN mkdir -p run/client/pingbypass/server
 RUN cp -r -f config/binds/ run/client/pingbypass/server/
 RUN cp -r -f config/settings/ run/client/pingbypass/server/
+RUN cp -f config/options.txt run/client/
 
-RUN chmod +x gradlew
-RUN ./gradlew -Phmc.lwjgl=true -Ppb.server=true test fabricJar
-
+RUN chmod +x gradlew \
+RUN ./gradlew -Phmc.lwjgl=true -Ppb.server=true test
+RUN ./gradlew -Phmc.lwjgl=true -Ppb.server=true fabricJar
 RUN ./gradlew -Phmc.lwjgl=true -Ppb.server=true fabricPreRunClient
 ENTRYPOINT sh -c "./gradlew -Phmc.lwjgl=true -Ppb.server=true fabricRunClient --console=plain"
