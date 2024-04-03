@@ -33,6 +33,7 @@ public class AntiAnvil extends BlockPlacingModule implements TrapsPlayers {
 
     public AntiAnvil(Phobot phobot, SurroundService surroundService) {
         super(phobot, phobot.getBlockPlacer(), "AntiAnvil", Categories.COMBAT, "Places blocks above you if anvils fall down on you.", 0);
+        listen(getBlackListClearListener());
         this.surroundService = surroundService;
     }
 
