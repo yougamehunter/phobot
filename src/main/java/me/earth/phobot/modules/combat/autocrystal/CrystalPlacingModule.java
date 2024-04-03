@@ -85,9 +85,8 @@ public class CrystalPlacingModule extends BlockPlacingModule {
     private final PositionPool<CrystalPosition> positionPool = new PositionPool<>(7, CrystalPosition::new, new CrystalPosition[0]);
 
     private final Map<BlockPos, Long> blockBlackList = new ConcurrentHashMap<>();
-    private final Map<Integer, Long> entityBlacklist = new ConcurrentHashMap<>();
-
     private final Map<BlockPos, Long> map = new ConcurrentHashMap<>();
+    
     private final StopWatch.ForMultipleThreads breakTimer = new StopWatch.ForMultipleThreads();
     private final StopWatch.ForMultipleThreads placeTimer = new StopWatch.ForMultipleThreads();
     private final StopWatch.ForMultipleThreads obbyTimer = new StopWatch.ForMultipleThreads();
@@ -179,6 +178,8 @@ public class CrystalPlacingModule extends BlockPlacingModule {
         listen(new SafeListener<PreMotionPlayerUpdateEvent>(mc, 1000) {
             @Override
             public void onEvent(PreMotionPlayerUpdateEvent event, LocalPlayer player, ClientLevel level, MultiPlayerGameMode multiPlayerGameMode) {
+                blockBlackList.entrySet().removeIf(e -> TimeUtil.isTimeStampOlderThan(e.getValue(), 10_000));
+                map.entrySet().removeIf(e -> TimeUtil.isTimeStampOlderThan(e.getValue(), 10_000));
                 if (phobot.getAntiCheat().getAttackRotations().getValue() && lastCrystalPos.getY() != -1000 && !placeTimer.passed(150)) {
                     float[] rotations = RotationUtil.getRotations(player, lastCrystalPos.getX() + 0.5, lastCrystalPos.getY(), lastCrystalPos.getZ() + 0.5);
                     phobot.getMotionUpdateService().rotate(player, rotations[0], rotations[1]);
