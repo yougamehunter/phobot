@@ -11,6 +11,7 @@ import me.earth.phobot.modules.ChecksBlockPlacingValidity;
 import me.earth.phobot.modules.client.anticheat.AntiCheat;
 import me.earth.phobot.services.inventory.InventoryContext;
 import me.earth.phobot.services.inventory.InventoryService;
+import me.earth.phobot.util.ResetUtil;
 import me.earth.phobot.util.math.RaytraceUtil;
 import me.earth.phobot.util.math.RotationUtil;
 import me.earth.phobot.util.world.BlockStateLevel;
@@ -104,6 +105,8 @@ public class BlockPlacer extends SubscriberImpl {
                 inventoryService.use(context -> endTick(context, player, level));
             }
         });
+
+        ResetUtil.onRespawnOrWorldChange(this, minecraft, () -> crystal = null);
     }
 
     public void addAction(Action action) {
