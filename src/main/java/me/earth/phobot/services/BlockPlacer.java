@@ -106,7 +106,12 @@ public class BlockPlacer extends SubscriberImpl {
             }
         });
 
-        ResetUtil.onRespawnOrWorldChange(this, minecraft, () -> crystal = null);
+        ResetUtil.onRespawnOrWorldChange(this, minecraft, () -> {
+            collisionContext = CollisionContext.empty();
+            actions.clear();
+            customBlockStateLevel = null;
+            crystal = null;
+        });
     }
 
     public void addAction(Action action) {
