@@ -27,7 +27,7 @@ public class Speed extends PhobotModule {
                 }
 
                 if (player.fallDistance <= 5.0 && (player.xxa != 0.0f || player.zza != 0.0f)) {
-                    state = phobot.getMovementService().getMovement().move(player, mc.level, state, getDirectionAndYMovement(player));
+                    state = phobot.getMovementService().getMovement(phobot).move(player, mc.level, state, getDirectionAndYMovement(player));
                     if (!state.isReset()) {
                         player.setDeltaMovement(player.getDeltaMovement().x, state.getDelta().y, player.getDeltaMovement().z);
                         event.setVec(new Vec3(state.getDelta().x, state.getDelta().y, state.getDelta().z));
