@@ -109,7 +109,7 @@ public class PhobotPlugin extends AbstractUnloadablePlugin {
         BlockPlacer blockPlacer = subscribe(unloadingService,
                 new BlockPlacer(localPlayerPositionService, motionUpdateService, inventoryService, pingBypass.getMinecraft(), antiCheat, attackService));
 
-        BlockUpdateService blockUpdateService = subscribe(unloadingService, new BlockUpdateService());
+        BlockUpdateService blockUpdateService = subscribe(unloadingService, new BlockUpdateService(pingBypass.getMinecraft()));
         subscribe(unloadingService, new PlayerPredictionService(antiCheat, pingBypass.getMinecraft(), movementService));
         BlockDestructionService blockDestructionService = subscribe(unloadingService, new BlockDestructionService(pingBypass.getMinecraft()));
         ThreadSafeLevelService threadSafeLevelService = subscribe(unloadingService, new ThreadSafeLevelService(pingBypass.getMinecraft()));
