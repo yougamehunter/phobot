@@ -5,6 +5,7 @@ import me.earth.phobot.util.ResetUtil;
 import me.earth.phobot.util.time.TimeUtil;
 import me.earth.pingbypass.api.event.SafeListener;
 import me.earth.pingbypass.api.event.SubscriberImpl;
+import me.earth.pingbypass.api.event.listeners.generic.Listener;
 import me.earth.pingbypass.api.event.loop.TickEvent;
 import me.earth.pingbypass.api.event.network.PacketEvent;
 import me.earth.pingbypass.api.event.network.ReceiveListener;
@@ -54,6 +55,14 @@ public class BlockDestructionService extends SubscriberImpl {
             }
         });
 
+        listen(new Listener<TickEvent>() {
+            @Override
+            public void onEvent(TickEvent event) {
+                // Remove block breaking progress after ~4 minutes
+                positions.entrySet().removeIf(entry -> TimeUtil.isTimeStampOlderThan(entry.getValue().timeStamp, 250_000L));
+            }
+        });
+
         ResetUtil.onRespawnOrWorldChange(this, mc, positions::clear);
     }
 
@@ -68,16 +77,16 @@ public class BlockDestructionService extends SubscriberImpl {
         positions.put(pos, new Progress(pos, TimeUtil.getMillis(), players));
     }
 
+    private boolean canRecord(BlockPos pos, ClientLevel level) {
+        BlockState state = level.getBlockState(pos);
+        return state.getDestroySpeed(level, pos) >= 0 && !state.isAir();
+    }
+
     public record Progress(BlockPos pos, long timeStamp, List<Player> players) {
         public boolean isInvalid() {
             players.removeIf(player -> player.isRemoved() || player.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) >= 7.0 * 7.0);
             return players.isEmpty();
         }
-    }
-
-    private boolean canRecord(BlockPos pos, ClientLevel level) {
-        BlockState state = level.getBlockState(pos);
-        return state.getDestroySpeed(level, pos) >= 0 && !state.isAir();
     }
 
 }

@@ -1,10 +1,13 @@
 package me.earth.phobot.services;
 
+import me.earth.phobot.util.ResetUtil;
 import me.earth.phobot.util.time.TimeUtil;
 import me.earth.pingbypass.api.event.SubscriberImpl;
 import me.earth.pingbypass.api.event.listeners.generic.Listener;
+import me.earth.pingbypass.api.event.loop.TickEvent;
 import me.earth.pingbypass.api.event.network.PacketEvent;
 import me.earth.pingbypass.api.event.network.ReceiveListener;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
@@ -19,10 +22,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+// TODO: what was this used for???
 public class BlockUpdateService extends SubscriberImpl {
     private final Map<BlockPos, Entry> map = new ConcurrentHashMap<>();
 
-    public BlockUpdateService() {
+    public BlockUpdateService(Minecraft mc) {
         listen(new Listener<PacketEvent.PostSend<ServerboundUseItemOnPacket>>(Integer.MIN_VALUE) {
             @Override
             public void onEvent(PacketEvent.PostSend<ServerboundUseItemOnPacket> event) {
@@ -55,6 +59,15 @@ public class BlockUpdateService extends SubscriberImpl {
                 }
             }
         });
+
+        listen(new Listener<TickEvent>() {
+            @Override
+            public void onEvent(TickEvent event) {
+                map.entrySet().removeIf(entry -> TimeUtil.isTimeStampOlderThan(entry.getValue().time, 10_000L));
+            }
+        });
+
+        ResetUtil.onRespawnOrWorldChange(this, mc, map::clear);
     }
 
     public void addBlockPos(BlockPos pos, Packet<?> packet, boolean immediate, boolean force, @Nullable Consumer<Long> callback) {
