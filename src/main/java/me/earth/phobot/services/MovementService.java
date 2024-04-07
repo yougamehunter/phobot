@@ -1,27 +1,15 @@
 package me.earth.phobot.services;
 
-import lombok.Getter;
-import me.earth.phobot.Phobot;
-import me.earth.phobot.movement.BunnyHop;
-import me.earth.phobot.movement.BunnyHopCC;
-import me.earth.phobot.movement.BunnyHopNcp;
+import lombok.RequiredArgsConstructor;
+import me.earth.phobot.modules.client.anticheat.AntiCheat;
 import me.earth.phobot.movement.Movement;
 
-@Getter
+@RequiredArgsConstructor
 public class MovementService {
-    private Movement movement;
-
-    public Movement getMovement(Phobot phobot) {
-        switch(phobot.getAntiCheat().getMovement().getValue()) {
-            case CC -> movement = new BunnyHopCC();
-            case Ncp -> movement = new BunnyHopNcp();
-            case Grim, Vanilla -> movement = new BunnyHop();
-        }
-        return movement;
-    }
+    private final AntiCheat antiCheat;
 
     public Movement getMovement() {
-        return new BunnyHopCC();
+        return antiCheat.getMovement().getValue().getMovement();
     }
 
 }

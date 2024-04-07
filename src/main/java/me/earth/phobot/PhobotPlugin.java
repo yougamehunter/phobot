@@ -67,7 +67,6 @@ public class PhobotPlugin extends AbstractUnloadablePlugin {
 
     private Phobot initalizePhobot(PingBypass pingBypass, ExecutorService executor, PluginUnloadingService unloadingService) {
         WorldVersionService worldVersionService = subscribe(unloadingService, new WorldVersionService());
-        MovementService movementService = new MovementService();
 
         Holes holes = new Holes(pingBypass, executor);
         unloadingService.registerModule(holes);
@@ -78,6 +77,11 @@ public class PhobotPlugin extends AbstractUnloadablePlugin {
         TotemPopService totemPopService = subscribe(unloadingService, new TotemPopService(pingBypass.getMinecraft()));
 
         DamageService damageService = subscribe(unloadingService, new DamageService(protectionCacheService, pingBypass.getMinecraft()));
+
+        ServerService serverService = subscribe(unloadingService, new ServerService());
+        AntiCheat antiCheat = new AntiCheat(pingBypass, serverService);
+        unloadingService.registerModule(antiCheat);
+        MovementService movementService = new MovementService(antiCheat);
 
         Pathfinding pathfinding = new Pathfinding(pingBypass, executor);
         unloadingService.registerModule(pathfinding);
@@ -90,10 +94,6 @@ public class PhobotPlugin extends AbstractUnloadablePlugin {
         TaskService taskService = subscribe(unloadingService, new TaskService(pingBypass.getMinecraft()));
         Pathfinder pathfinder = subscribe(unloadingService,
                 new Pathfinder(pingBypass, unloadingService.getEventBus(), navigationMeshManager, executor, taskService, pathfinding));
-
-        ServerService serverService = subscribe(unloadingService, new ServerService());
-        AntiCheat antiCheat = new AntiCheat(pingBypass, serverService);
-        unloadingService.registerModule(antiCheat);
 
         subscribe(unloadingService, new TickPredictionService(pingBypass.getMinecraft()));
         LocalPlayerPositionService localPlayerPositionService = subscribe(unloadingService, new LocalPlayerPositionService(pingBypass.getMinecraft()));
