@@ -35,4 +35,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Phobot
-          path: ./build/libs/phobot-fabric*.jar
+          path: ./build/libs
