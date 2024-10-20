@@ -35,10 +35,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Phobot
-          path: ./fabric/build/libs/phobot-fabric*.jar
-
-      - name: Upload forge jar
-        uses: actions/upload-artifact@v3
-        with:
-          name: Phobot
-          path: ./forge/build/libs/phobot-forge*.jar
+          path: ./build/libs/phobot-fabric*.jar
