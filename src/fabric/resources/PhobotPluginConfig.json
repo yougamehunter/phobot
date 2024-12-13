@@ -6,3 +6,4 @@
   "mixinConnector": "me.earth.phobot.asm.PhobotPreLaunchPlugin",
   "platforms": [{"name": "fabric"}]
 }
+
